@@ -16,6 +16,8 @@ set(PROJECT_SOURCES
         main.cpp
         Window.cpp
         Window.h
+        Garden.cpp
+        Garden.h
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
