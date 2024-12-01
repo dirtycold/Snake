@@ -12,16 +12,19 @@ public:
 
     enum Direction
     {
+        Right,
         Up,
-        Down,
         Left,
-        Right
+        Down,
     };
 
     Snake(QPoint head);
     ~Snake();
 
     const Body& body() const;
+    Direction direction() const;
+    Direction direction(Direction dir);
+    QPoint move();
 
 private:
     class Private;
