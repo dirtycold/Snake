@@ -18,6 +18,8 @@ set(PROJECT_SOURCES
         Window.h
         Garden.cpp
         Garden.h
+        Snake.cpp
+        Snake.h
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)

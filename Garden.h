@@ -1,3 +1,6 @@
+#ifndef GARDEN_H
+#define GARDEN_H
+
 #include <QWidget>
 #include <QPaintEvent>
 #include <QScopedPointer>
@@ -15,3 +18,5 @@ private:
     class Private;
     QScopedPointer<Private> p;
 };
+
+#endif // GARDEN_H
