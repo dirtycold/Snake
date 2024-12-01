@@ -75,3 +75,6 @@ CMakeLists.txt.user*
 *_qmlcache.qrc
 
 # End of https://www.toptal.com/developers/gitignore/api/qt,cmake
+
+# VSCode
+.vscode/
