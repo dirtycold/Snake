@@ -29,7 +29,7 @@ public:
     Snake(Cell head);
     ~Snake();
 
-    Body& body();
+    const Body& body() const;
 
 private:
     class Private;

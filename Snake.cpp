@@ -29,7 +29,7 @@ Snake::~Snake()
 {
 }
 
-Snake::Body& Snake::body()
+const Snake::Body& Snake::body() const
 {
     return p->body;
 }

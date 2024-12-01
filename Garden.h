@@ -1,18 +1,16 @@
 #ifndef GARDEN_H
 #define GARDEN_H
 
-#include <QWidget>
-#include <QPaintEvent>
+#include <QSize>
 #include <QScopedPointer>
 
-class Garden : public QWidget
+class Garden
 {
 public:
-    Garden(QWidget* parent = nullptr);
+    Garden();
     ~Garden();
 
-protected:
-    void paintEvent(QPaintEvent* event) override;
+    QSize size() const;
 
 private:
     class Private;

@@ -1,10 +1,10 @@
 #include "Window.h"
-#include "Garden.h"
+#include "Canvas.h"
 
 Window::Window(QWidget *parent)
     : QMainWindow(parent)
 {
-    setCentralWidget(new Garden);
+    setCentralWidget(new Canvas);
 }
 
 Window::~Window()
