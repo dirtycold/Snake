@@ -10,7 +10,7 @@ class Canvas::Private
     int cell = 10;
 
     Garden garden = Garden();
-    Snake snake = Snake(QPoint(15, 15));
+    Snake snake = Snake(QPoint(garden.size().width() / 2 - 1, garden.size().height() / 2 - 1));
 };
 
 Canvas::Canvas(QWidget *parent)
