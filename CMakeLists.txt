@@ -22,6 +22,8 @@ set(PROJECT_SOURCES
         Garden.h
         Snake.cpp
         Snake.h
+        Apple.cpp
+        Apple.h
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)

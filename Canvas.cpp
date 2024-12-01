@@ -1,6 +1,7 @@
 #include "Canvas.h"
 #include "Garden.h"
 #include "Snake.h"
+#include "Apple.h"
 #include <QPainter>
 
 class Canvas::Private
@@ -11,6 +12,7 @@ class Canvas::Private
 
     Garden garden = Garden();
     Snake snake = Snake(QPoint(garden.size().width() / 2 - 1, garden.size().height() / 2 - 1));
+    Apple apple = Apple(QPoint(garden.size().width() / 2 + 4, garden.size().height() / 2 - 1));
 };
 
 Canvas::Canvas(QWidget *parent)
@@ -25,8 +27,9 @@ Canvas::~Canvas()
 
 void Canvas::paintEvent(QPaintEvent *event)
 {
-    QColor background(235, 244, 222);
+    QColor background(255, 255, 255);
     QColor foreground(0, 0, 0);
+    QColor apple = Qt::red;
 
     QPainter painter(this);
     painter.setBrush(background);
@@ -41,6 +44,12 @@ void Canvas::paintEvent(QPaintEvent *event)
                          p->cell,
                          p->cell);
     }
+
+    painter.setBrush(apple);
+    painter.drawRect((p->apple.position().x()) * p->cell,
+                     (p->apple.position().y()) * p->cell,
+                     p->cell,
+                     p->cell);
 
     event->accept();
 }
