@@ -10,7 +10,7 @@ class Canvas::Private
     int cell = 10;
 
     Garden garden = Garden();
-    Snake snake = Snake(Snake::Cell(15, 15));
+    Snake snake = Snake(QPoint(15, 15));
 };
 
 Canvas::Canvas(QWidget *parent)
@@ -36,8 +36,8 @@ void Canvas::paintEvent(QPaintEvent *event)
     for (auto cell : body)
     {
         painter.setBrush(foreground);
-        painter.drawRect((cell.x) * p->cell,
-                         (cell.y) * p->cell,
+        painter.drawRect((cell.x()) * p->cell,
+                         (cell.y()) * p->cell,
                          p->cell,
                          p->cell);
     }

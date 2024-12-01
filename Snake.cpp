@@ -8,18 +8,17 @@ class Snake::Private
     int length = 5;
     Direction dir = Right;
 
-    void make(Cell head)
+    void make(QPoint head)
     {
-        for(int l; l < length; ++l)
+        for(int l = 0; l < length; ++l)
         {
-            Cell cell = head;
-            cell.x = head.x - l;
+            QPoint cell = head - QPoint(l, 0);
             body.append(cell);
         }
     }
 };
 
-Snake::Snake(Cell head)
+Snake::Snake(QPoint head)
     : p(new Private)
 {
     p->make(head);

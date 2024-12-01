@@ -1,22 +1,14 @@
 #ifndef SNAKE_H
 #define SNAKE_H
 
+#include <QPoint>
 #include <QVector>
 #include <QScopedPointer>
 
 class Snake
 {
 public:
-
-    struct Cell
-    {
-        int x;
-        int y;
-
-        Cell(int x, int y) : x(x), y(y) {}
-    };
-
-    typedef QVector<Cell> Body;
+    typedef QVector<QPoint> Body;
 
     enum Direction
     {
@@ -26,7 +18,7 @@ public:
         Right
     };
 
-    Snake(Cell head);
+    Snake(QPoint head);
     ~Snake();
 
     const Body& body() const;
