@@ -12,6 +12,8 @@ public:
     Canvas(QWidget *parent = nullptr);
     ~Canvas();
 
+    void step();
+
 protected:
     void paintEvent(QPaintEvent *event) override;
     void keyPressEvent(QKeyEvent* event) override;

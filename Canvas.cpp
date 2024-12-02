@@ -28,15 +28,17 @@ Canvas::Canvas(QWidget *parent)
     p->timer.setSingleShot(false);
     p->timer.start();
 
-    connect(&p->timer, &QTimer::timeout, this, [this]()
-    {
-        p->snake.move();
-        update();
-    });
+    connect(&p->timer, &QTimer::timeout, this, &Canvas::step);
 }
 
 Canvas::~Canvas()
 {
+}
+
+void Canvas::step()
+{
+    p->snake.move();
+    update();
 }
 
 void Canvas::paintEvent(QPaintEvent *event)
