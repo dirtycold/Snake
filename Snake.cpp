@@ -20,9 +20,9 @@ class Snake::Private
         QPoint diff[] =
         {
             { 1,  0},
-            { 0,  1},
-            {-1,  0},
             { 0, -1},
+            {-1,  0},
+            { 0,  1},
         };
         return body.first() + diff[dir];
     }

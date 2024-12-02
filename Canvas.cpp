@@ -10,6 +10,7 @@ class Canvas::Private
     friend class Canvas;
 
     int cell = 10;
+    int interval = 1000;
 
     Garden garden = Garden();
     Snake snake = Snake(QPoint(garden.size().width() / 2, garden.size().height() / 2));
@@ -23,7 +24,7 @@ Canvas::Canvas(QWidget *parent)
 {
     setFixedSize(p->garden.size() * p->cell + QSize(1, 1));
 
-    p->timer.setInterval(1000);
+    p->timer.setInterval(p->interval);
     p->timer.setSingleShot(false);
     p->timer.start();
 
@@ -64,5 +65,19 @@ void Canvas::paintEvent(QPaintEvent *event)
                      p->cell,
                      p->cell);
 
+    event->accept();
+}
+
+void Canvas::keyPressEvent(QKeyEvent *event)
+{
+    switch(event->key())
+    {
+        case Qt::Key_Left:  p->snake.direction(Snake::Direction::Left);                 break;
+        case Qt::Key_Up:    p->snake.direction(Snake::Direction::Up);                   break;
+        case Qt::Key_Right: p->snake.direction(Snake::Direction::Right);                break;
+        case Qt::Key_Down:  p->snake.direction(Snake::Direction::Down);                 break;
+        case Qt::Key_Space: p->timer.isActive() ? p->timer.stop() : p->timer.start();   break;
+        default:    break;
+    }
     event->accept();
 }

@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <QPaintEvent>
+#include <QKeyEvent>
 #include <QScopedPointer>
 
 class Canvas : public QWidget
@@ -13,6 +14,7 @@ public:
 
 protected:
     void paintEvent(QPaintEvent *event) override;
+    void keyPressEvent(QKeyEvent* event) override;
 
 private:
     class Private;
