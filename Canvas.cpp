@@ -50,9 +50,20 @@ void Canvas::step()
     if(p->snake.move(p->apple.position()))
         p->apple.move(apple());
 
-    auto snake = p->snake.body();
-    auto unique = QSet<QPoint>(snake.begin(), snake.end());
+    auto& snake = p->snake.body();
+    auto head = p->snake.body().front();
+    if(head.x() < 0 || head.x() >= p->garden.size().width())
+    {
+        head.setX(head.x() < 0 ? p->garden.size().width() - 1 : 0);
+        p->snake.shift(head);
+    }
+    else if(head.y() < 0 || head.y() >= p->garden.size().height())
+    {
+        head.setY(head.y() < 0 ? p->garden.size().height() - 1 : 0);
+        p->snake.shift(head);
+    }
 
+    auto unique = QSet<QPoint>(snake.begin(), snake.end());
     if(unique.size() != snake.size())
         p->timer.stop();
 

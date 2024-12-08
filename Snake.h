@@ -25,6 +25,7 @@ public:
     Direction direction() const;
     Direction direction(Direction dir);
     bool move(QPoint apple);
+    void shift(QPoint next);
 
 private:
     class Private;

@@ -66,3 +66,8 @@ bool Snake::move(QPoint apple)
         p->body.removeLast();
     return eat;
 }
+
+void Snake::shift(QPoint next)
+{
+    p->body.emplaceFront(next);
+}
