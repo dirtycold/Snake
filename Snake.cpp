@@ -69,5 +69,5 @@ bool Snake::move(QPoint apple)
 
 void Snake::shift(QPoint next)
 {
-    p->body.emplaceFront(next);
+    p->body.first() = next;
 }
