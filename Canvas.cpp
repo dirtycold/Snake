@@ -4,6 +4,7 @@
 #include "Apple.h"
 #include <QPainter>
 #include <QTimer>
+#include <QSet>
 #include <random>
 
 class Canvas::Private
@@ -48,6 +49,13 @@ void Canvas::step()
 
     if(p->snake.move(p->apple.position()))
         p->apple.move(apple());
+
+    auto snake = p->snake.body();
+    auto unique = QSet<QPoint>(snake.begin(), snake.end());
+
+    if(unique.size() != snake.size())
+        p->timer.stop();
+
     update();
 }
 
