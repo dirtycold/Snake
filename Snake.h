@@ -24,7 +24,7 @@ public:
     const Body& body() const;
     Direction direction() const;
     Direction direction(Direction dir);
-    QPoint move();
+    bool move(QPoint apple);
 
 private:
     class Private;

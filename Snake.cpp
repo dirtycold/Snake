@@ -57,9 +57,12 @@ Snake::Direction Snake::direction(Direction dir)
     return direction();
 }
 
-QPoint Snake::move()
+bool Snake::move(QPoint apple)
 {
-    p->body.prepend(p->next());
-    p->body.removeLast();
-    return p->body.first();
+    auto next = p->next();
+    auto eat  = apple == next;
+    p->body.prepend(next);
+    if(!eat)
+        p->body.removeLast();
+    return eat;
 }

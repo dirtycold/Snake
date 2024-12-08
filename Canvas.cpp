@@ -4,6 +4,7 @@
 #include "Apple.h"
 #include <QPainter>
 #include <QTimer>
+#include <random>
 
 class Canvas::Private
 {
@@ -37,7 +38,16 @@ Canvas::~Canvas()
 
 void Canvas::step()
 {
-    p->snake.move();
+    auto apple = [this]() -> QPoint
+    {
+        static std::mt19937 rng(std::random_device{}());
+        std::uniform_int_distribution<int> distX(0, p->garden.size().width() - 1);
+        std::uniform_int_distribution<int> distY(0, p->garden.size().height() - 1);
+        return QPoint(distX(rng), distY(rng));
+    };
+
+    if(p->snake.move(p->apple.position()))
+        p->apple.move(apple());
     update();
 }
 
