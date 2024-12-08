@@ -24,8 +24,8 @@ public:
     const Body& body() const;
     Direction direction() const;
     Direction direction(Direction dir);
-    bool move(QPoint apple);
-    void shift(QPoint next);
+    QPoint next();
+    void move(QPoint next, bool eat);
 
 private:
     class Private;

@@ -14,18 +14,6 @@ class Snake::Private
             body.append(cell);
         }
     }
-
-    QPoint next()
-    {
-        QPoint diff[] =
-        {
-            { 1,  0},
-            { 0, -1},
-            {-1,  0},
-            { 0,  1},
-        };
-        return body.first() + diff[dir];
-    }
 };
 
 Snake::Snake(QPoint head)
@@ -57,17 +45,21 @@ Snake::Direction Snake::direction(Direction dir)
     return direction();
 }
 
-bool Snake::move(QPoint apple)
+QPoint Snake::next()
 {
-    auto next = p->next();
-    auto eat  = apple == next;
+    QPoint diff[] =
+    {
+        { 1,  0},
+        { 0, -1},
+        {-1,  0},
+        { 0,  1},
+    };
+    return p->body.first() + diff[p->dir];
+}
+
+void Snake::move(QPoint next, bool eat)
+{
     p->body.prepend(next);
     if(!eat)
         p->body.removeLast();
-    return eat;
-}
-
-void Snake::shift(QPoint next)
-{
-    p->body.first() = next;
 }
