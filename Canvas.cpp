@@ -44,17 +44,22 @@ void Canvas::step()
 void Canvas::paintEvent(QPaintEvent *event)
 {
     QColor background(224, 224, 224);
-    QColor foreground(64, 64, 64);
+    QColor body(128, 128, 128);
+    QColor head(64, 64, 64);
     QColor highlight = Qt::red;
 
     QPainter painter(this);
     painter.setBrush(background);
     painter.drawRect(QRect(rect().topLeft(), p->garden.size() * p->cell));
 
-    auto body = p->snake.body();
-    for (auto cell : body)
+    auto snake = p->snake.body();
+    painter.setBrush(head);
+    for (const auto& cell : snake)
     {
-        painter.setBrush(foreground);
+        if(cell == snake.first())
+            painter.setBrush(head);
+        else
+            painter.setBrush(body);
         painter.drawRect((cell.x()) * p->cell,
                          (cell.y()) * p->cell,
                          p->cell,
