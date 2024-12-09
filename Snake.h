@@ -22,7 +22,6 @@ public:
     ~Snake();
 
     const Body& body() const;
-    Direction direction() const;
     Direction direction(Direction dir);
     QPoint next();
     void move(QPoint next, bool eat);

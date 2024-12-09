@@ -6,6 +6,7 @@ class Snake::Private
 
     Body body;
     Direction dir = Right;
+    Direction rid = Right;
     void make(QPoint head)
     {
         for(int l = 0; l < 5; ++l)
@@ -31,18 +32,13 @@ const Snake::Body& Snake::body() const
     return p->body;
 }
 
-Snake::Direction Snake::direction() const
-{
-    return p->dir;
-}
-
 Snake::Direction Snake::direction(Direction dir)
 {
-    if(p->dir != ((dir + 2) % 4))
+    if(p->rid != ((dir + 2) % 4))
     {
         p->dir = dir;
     }
-    return direction();
+    return p->dir;
 }
 
 QPoint Snake::next()
@@ -59,6 +55,7 @@ QPoint Snake::next()
 
 void Snake::move(QPoint next, bool eat)
 {
+    p->rid = p->dir;
     p->body.prepend(next);
     if(!eat)
         p->body.removeLast();
