@@ -75,7 +75,8 @@ void Canvas::paintEvent(QPaintEvent *event)
     QColor background(224, 224, 224);
     QColor body(128, 128, 128);
     QColor head(64, 64, 64);
-    QColor highlight = Qt::red;
+    QColor apple = Qt::red;
+    QColor leaf  = Qt::green;
 
     QPainter painter(this);
     painter.setBrush(background);
@@ -95,11 +96,20 @@ void Canvas::paintEvent(QPaintEvent *event)
                          p->cell);
     }
 
-    painter.setBrush(highlight);
-    painter.drawRect((p->apple.position().x()) * p->cell,
-                     (p->apple.position().y()) * p->cell,
-                     p->cell,
-                     p->cell);
+    // Draw a 10x10 sprite of a red apple with a green leaf
+    QPoint applePosition = p->apple.position() * p->cell;
+
+    // Draw the red apple
+    painter.setBrush(apple);
+    painter.drawEllipse(QRect(applePosition.x(), applePosition.y(), p->cell, p->cell));
+
+    //Draw the green leaf
+    painter.setBrush(leaf);
+    painter.save(); // Save the current painter state
+    painter.translate(applePosition.x() + p->cell / 2, applePosition.y()); // Move to the top of the apple
+    painter.rotate(45); // Rotate 45 degrees to the upper right
+    painter.drawEllipse(QRect(0, 0, 5, -7)); // Draw the oval leaf
+    painter.restore(); // Restore the painter state
 
     event->accept();
 }
