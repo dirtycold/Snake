@@ -5,7 +5,9 @@
 #include <QPainter>
 #include <QTimer>
 #include <QSet>
-#include <random>
+#include <QRandomGenerator>
+
+#define qrand QRandomGenerator::global()->generate
 
 class Canvas::Private
 {
@@ -41,10 +43,7 @@ void Canvas::step()
 {
     auto apple = [this]() -> QPoint
     {
-        static std::mt19937 rng(std::random_device{}());
-        std::uniform_int_distribution<int> distX(0, p->garden.size().width() - 1);
-        std::uniform_int_distribution<int> distY(0, p->garden.size().height() - 1);
-        return QPoint(distX(rng), distY(rng));
+        return QPoint(qrand() % p->garden.size().width(), qrand() % p->garden.size().height());
     };
 
     auto head = p->snake.next();
