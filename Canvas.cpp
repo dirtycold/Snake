@@ -71,28 +71,81 @@ void Canvas::step()
 
 void Canvas::paintEvent(QPaintEvent *event)
 {
-    QColor background(224, 224, 224);
+    QColor background(96, 192, 64);
     QColor body(128, 128, 128);
     QColor head(64, 64, 64);
     QColor apple = Qt::red;
     QColor leaf  = Qt::green;
 
     QPainter painter(this);
-    painter.setBrush(background);
+
+    // Draw the garden background with a more realistic grass pattern
+    QPixmap grassPattern(256, 256);
+    grassPattern.fill(background);
+    QPainter grassPainter(&grassPattern);
+
+    // Draw random grass blades
+    grassPainter.setPen(QPen(Qt::darkGreen, 1));
+    for (int i = 0; i < 100; ++i) {
+        int x = qrand() % 256;
+        int y = qrand() % 256;
+        int length = qrand() % 10 + 5;
+        grassPainter.drawLine(x, y, x, y + length);
+    }
+
+    // Draw some lighter grass blades
+    grassPainter.setPen(QPen(Qt::green, 1));
+    for (int i = 0; i < 50; ++i) {
+        int x = qrand() % 256;
+        int y = qrand() % 256;
+        int length = qrand() % 10 + 5;
+        grassPainter.drawLine(x, y, x, y + length);
+    }
+
+    grassPainter.end();
+
+    QBrush grassBrush(grassPattern);
+    painter.setBrush(grassBrush);
     painter.drawRect(QRect(rect().topLeft(), p->garden.size() * p->cell));
 
+    // Define extended rainbow colors using RGB values
+    QList<QColor> rainbowColors = {
+        QColor(255, 0, 0),    // Red
+        QColor(255, 69, 0),   // Orange Red
+        QColor(255, 140, 0),  // Dark Orange
+        QColor(255, 165, 0),  // Orange
+        QColor(255, 215, 0),  // Gold
+        QColor(255, 255, 0),  // Yellow
+        QColor(238, 232, 170),// Pale Goldenrod
+        QColor(173, 255, 47), // Green Yellow
+        QColor(0, 255, 0),    // Lime
+        QColor(50, 205, 50),  // Lime Green
+        QColor(0, 128, 0),    // Green
+        QColor(0, 255, 127),  // Spring Green
+        QColor(0, 255, 255),  // Cyan
+        QColor(0, 206, 209),  // Dark Turquoise
+        QColor(0, 191, 255),  // Deep Sky Blue
+        QColor(0, 0, 255),    // Blue
+        QColor(75, 0, 130),   // Indigo
+        QColor(138, 43, 226), // Blue Violet
+        QColor(148, 0, 211),  // Dark Violet
+        QColor(186, 85, 211), // Medium Orchid
+        QColor(238, 130, 238),// Violet
+        QColor(255, 20, 147), // Deep Pink
+        QColor(255, 105, 180),// Hot Pink
+        QColor(255, 192, 203) // Pink
+    };
+
     auto snake = p->snake.body();
-    painter.setBrush(head);
+    int colorIndex = 0;
     for (const auto& cell : snake)
     {
-        if(cell == snake.first())
-            painter.setBrush(head);
-        else
-            painter.setBrush(body);
+        painter.setBrush(rainbowColors[colorIndex % rainbowColors.size()]);
         painter.drawRect((cell.x()) * p->cell,
                          (cell.y()) * p->cell,
                          p->cell,
                          p->cell);
+        colorIndex++;
     }
 
     // Draw a 10x10 sprite of a red apple with a green leaf
