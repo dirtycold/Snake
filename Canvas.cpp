@@ -13,7 +13,7 @@ class Canvas::Private
 {
     friend class Canvas;
 
-    int cell = 16;
+    int cell = 32;
     int interval = 200;
 
     Garden garden = Garden();
