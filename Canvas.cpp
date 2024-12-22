@@ -11,8 +11,8 @@ class Canvas::Private
 {
     friend class Canvas;
 
-    int cell = 10;
-    int interval = 1000;
+    int cell = 16;
+    int interval = 200;
 
     Garden garden = Garden();
     Snake snake = Snake(QPoint(garden.size().width() / 2, garden.size().height() / 2));

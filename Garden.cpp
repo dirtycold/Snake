@@ -6,8 +6,8 @@ class Garden::Private
 {
     friend class Garden;
 
-    int width = 31;
-    int height = 31;
+    int width = 15;
+    int height = 15;
 
     QSize size = QSize(width, height);
 };
